@@ -16,10 +16,17 @@ jobs:
         with:
           node-version: 18
           cache: ''
-      # - run: npm cache --force clean && npm install --force node-sass
+          
+      - name: Clean npm cache and install dependencies
+        run: |
+          npm cache clean --force
+          npm install --legacy-peer-deps      
+          
       - name: Pull Vercel Environment Information
         run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_BACKEND_TOKEN }}
+
       - name: Build Project Artifacts
         run: vercel build --prod --token=${{ secrets.VERCEL_BACKEND_TOKEN }}
+        
       - name: Deploy Project Artifacts to Vercel
         run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_BACKEND_TOKEN }}
