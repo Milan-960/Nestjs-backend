@@ -1,6 +1,6 @@
-import * as path from 'path';
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
+
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { MercuriusDriver, MercuriusDriverConfig } from '@nestjs/mercurius';
@@ -16,7 +16,7 @@ import { SampleResolver } from './graphql/sample.resolver';
       driver: MercuriusDriver,
       useFactory: (pubsub: PubSub): MercuriusDriverConfig => {
         return {
-          autoSchemaFile: path.join(process.cwd(), 'src/graphql/schema.gql'),
+          autoSchemaFile: true,
           subscription: {
             pubsub: pubsub,
           },
