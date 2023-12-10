@@ -6,4 +6,9 @@ export class SampleResolver {
   async hello() {
     return 'Hello World!';
   }
+
+  @Query(() => String)
+  async hi() {
+    return 'Hi World!';
+  }
 }
