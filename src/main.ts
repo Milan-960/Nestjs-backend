@@ -1,10 +1,18 @@
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import {
+  FastifyAdapter,
+  NestFastifyApplication,
+} from '@nestjs/platform-fastify';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+
 // import { ConfigService } from '@nestjs/config';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-
+  const app = await NestFactory.create<NestFastifyApplication>(
+    AppModule,
+    new FastifyAdapter(),
+  );
   // Restrict CORS to your frontend app domain
   // const configService = app.get(ConfigService);
   // const frontendUrl = configService.get('FRONTEND_URL');
@@ -19,6 +27,15 @@ async function bootstrap() {
     maxAge: 3600,
     exposedHeaders: 'Authorization',
   });
+
+  const config = new DocumentBuilder()
+    .setTitle('Example API')
+    .setDescription('The API description')
+    .setVersion('1.0')
+    .addTag('example')
+    .build();
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('api', app, document);
 
   await app.listen(process.env.PORT || 3000);
 }
