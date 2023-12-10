@@ -6,7 +6,7 @@ import { AppService } from './app.service';
 import { MercuriusDriver, MercuriusDriverConfig } from '@nestjs/mercurius';
 import { PubsubModule } from './graphql/pubsub/pubsub.module';
 import { PubSub } from './graphql/pubsub/pubsub';
-import { join } from 'path';
+
 import { SampleResolver } from './graphql/sample.resolver';
 
 @Module({
@@ -16,7 +16,7 @@ import { SampleResolver } from './graphql/sample.resolver';
       driver: MercuriusDriver,
       useFactory: (pubsub: PubSub): MercuriusDriverConfig => {
         return {
-          autoSchemaFile: join(process.cwd(), 'src/graphql/schema.gql'),
+          autoSchemaFile: true,
           subscription: {
             pubsub: pubsub,
           },
