@@ -8,7 +8,7 @@ export class SampleResolver {
   }
 
   @Query(() => String)
-  async bye() {
-    return 'Bye World!';
+  async hi() {
+    return 'Hi World!';
   }
 }
