@@ -88,9 +88,9 @@ $ npm run test:cov
 
 1. **Clone the repository:**
    ```sh
-   git clone https://github.com/Milan-960/nestjs-backend.git
+   git clone https://github.com/Milan-960/Nestjs-backend.git
    # and
-   cd nestjs-backend
+   cd Nestjs-backend
    ```
 
 ## Database Setup on Railway
